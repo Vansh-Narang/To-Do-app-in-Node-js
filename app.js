@@ -7,9 +7,9 @@ app.set('view engine', 'ejs')//will find the view folder
 app.use(bodyParser.urlencoded({ extended: true }));
 let newitems = []
 app.get('/', (req, res) => {
-    let today = new Date().toLocaleDateString()
-    console.log(today)
-    res.render('list', { kindofday: today, newlistitems: newitems })
+    // let today = new Date().toLocaleDateString()
+    // console.log(today)
+    res.render('list', { newlistitems: newitems })
     //render will file list and will find of kind of day and today will provide it value of today
 
 })
