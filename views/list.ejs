@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list App</title>
+</head>
+
+<body>
+    <h1>
+        <%=kindofday %>
+    </h1>
+    <ul>
+        <li>
+            Buy food
+        </li>
+        <li>
+            Cook food
+        </li>
+        <li>
+            Eat food
+        </li>
+        <!-- Script tag is used to make use of html in js -->
+        <% for( i=0;i<newlistitems.length;i++) { %>
+            <li>
+                <%=newlistitems[i]%>
+            </li>
+            <% } %>
+                <form action="/" method="post">
+                    <input type="text" name="newItem" autocomplete="off" id="">
+                    <button type="submit">Add New </button>
+                </form>
+    </ul>
+</body>
+
+</html>
