@@ -4,14 +4,21 @@ const url = "monogdb://localhost:27017/todolistDatabase"
 const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const app = express();
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useNewUrlParser: true }, (err) => {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        console.log("successfully");
+    }
+});
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.MONGO_URL, () => {
+    console.log("Connected to MongoDB");
+});
 
 app.set('view engine', 'ejs')//will find the view folder
 app.use(bodyParser.urlencoded({ extended: true }));
-mongoose.connect(url, { useNewUrlParser: true });
-
-con.on('open', function () {
-    console.log("connected");
-})
 //Schema create to store in db
 
 const itemSchema = {
