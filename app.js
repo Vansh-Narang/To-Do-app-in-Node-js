@@ -31,7 +31,7 @@ const Item3 = new Item({
 });
 
 const d = [Item1, Item2, Item3]
-
+/*
 Item.insertMany(d, function (error) {
     if (error) {
         console.log(error);
@@ -39,19 +39,44 @@ Item.insertMany(d, function (error) {
     else {
         console.log("Updated");
     }
-})//Insert in schema
+})//Insert in schema*/
+
 
 app.get('/', (req, res) => {
     // let today = new Date().toLocaleDateString()
     // console.log(today)
-    res.render('list', { newlistitems: newitems })
+    Item.find({}, function (err, f) {
+        if (f.length == 0) {
+            Item.insertMany(d, function (error) {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log("Updated");
+                }
+            });
+            res.redirect('/')//when if condition then update and store in browser
+        }
+        else {
+            //normalintailized if length ==0
+            res.render('list', { newlistitems: f })
+        }
+
+        // console.log(f);
+    })//finding all items
+    // res.render('list', { newlistitems: newitems })
     //render will file list and will find of kind of day and today will provide it value of today
 
 })
 app.post('/', (req, res) => {
-    let newitem = req.body.newItem
-    newitems.push(newitem)
-    res.redirect('/')
+    const itemname = req.body.newItem
+    // newitems.push(newitem)
+    // res.redirect('/')
+    const item4 = new Item({
+        name: itemname
+    });
+    item4.save();
+
 })
 
 app.listen(3000, () => {
