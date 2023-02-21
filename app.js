@@ -1,22 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const url = "monogdb://localhost:27017/todolistDatabase"
+const url = "monogdb://localhost/todolistDatabase"
 const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const app = express();
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useNewUrlParser: true }, (err) => {
-    if (err) {
-        console.log(err);
-    }
-    else {
-        console.log("successfully");
-    }
-});
 mongoose.set("strictQuery", false);
-mongoose.connect(process.env.MONGO_URL, () => {
-    console.log("Connected to MongoDB");
-});
+mongoose.connect('mongodb://127.0.0.1:27017/todo')
+const con = mongoose.connection
 
+con.on('open', function () {
+    console.log("connected ");
+})
 app.set('view engine', 'ejs')//will find the view folder
 app.use(bodyParser.urlencoded({ extended: true }));
 //Schema create to store in db
