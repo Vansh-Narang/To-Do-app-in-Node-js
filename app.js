@@ -1,11 +1,45 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const url = "monogdb://localhost:27017/todolistDatabase"
 const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const app = express();
 
 app.set('view engine', 'ejs')//will find the view folder
 app.use(bodyParser.urlencoded({ extended: true }));
-let newitems = []
+mongoose.connect(url, { useNewUrlParser: true });
+
+con.on('open', function () {
+    console.log("connected");
+})
+//Schema create to store in db
+
+const itemSchema = {
+    name: String
+}
+const Item = mongoose.model('Item', itemSchema);
+//creating items
+const Item1 = new Item({
+    name: "Welcome",
+})
+const Item2 = new Item({
+    name: "garvit",
+})
+const Item3 = new Item({
+    name: "vansh",
+});
+
+const d = [Item1, Item2, Item3]
+
+Item.insertMany(d, function (error) {
+    if (error) {
+        console.log(error);
+    }
+    else {
+        console.log("Updated");
+    }
+})//Insert in schema
+
 app.get('/', (req, res) => {
     // let today = new Date().toLocaleDateString()
     // console.log(today)
