@@ -58,25 +58,28 @@ app.get('/', (req, res) => {
             res.redirect('/')//when if condition then update and store in browser
         }
         else {
-            //normalintailized if length ==0
-            res.render('list', { newlistitems: f })
+            //normal intailized if length ==0
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.render('list', { newlistitems: f })
+            }
         }
-
-        // console.log(f);
     })//finding all items
     // res.render('list', { newlistitems: newitems })
     //render will file list and will find of kind of day and today will provide it value of today
 
 })
-app.post('/', (req, res) => {
-    const itemname = req.body.newItem
-    // newitems.push(newitem)
-    // res.redirect('/')
-    const item4 = new Item({
+app.post('/', async (req, res) => {
+    const itemname = req.body.n
+    console.log(itemname);
+    const item = new Item({
         name: itemname
-    });
-    item4.save();
 
+    });
+    await item.save();
+    res.redirect('/')
 })
 
 app.listen(3000, () => {
