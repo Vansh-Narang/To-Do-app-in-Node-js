@@ -14,7 +14,7 @@ con.on('open', function () {
 })
 app.set('view engine', 'ejs')//will find the view folder
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(morgan('dev'))
 app.use((req, res, next) => {
     console.log("request from the middleware");
     next();
