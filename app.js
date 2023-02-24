@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan')
 const mongoose = require('mongoose');
 const url = "monogdb://localhost/todolistDatabase"
 const bodyParser = require('body-parser');
@@ -13,6 +14,11 @@ con.on('open', function () {
 })
 app.set('view engine', 'ejs')//will find the view folder
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+    console.log("request from the middleware");
+    next();
+})
 //Schema create to store in db
 
 const itemSchema = {
